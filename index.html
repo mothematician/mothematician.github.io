@@ -9,8 +9,29 @@
         
 
 <body>
-<h1>Hello World</h1>
+<h1>Monica Sing</h1>
 <p>I'm hosted with GitHub Pages.</p>
+
+<!--https://poems.verses.xyz/test-->
+
+<div id="telescopicPoem"></div>
+<script>
+  const telescopicContent = createTelescopicTextFromBulletedList(`- i
+- am
+- a high school senior
+ - an incoming first year
+  - a future mathematician
+   - a pale blue dot
+- with 
+- a persistent curiosity
+ - a tenacious wandering 
+- to uncover the depths of human knowledge
+ - to explore beyond the boundaries of our understanding
+  - for new discoveries
+   - for the abstract world of mathematics`, {separator: ' ', textMode: 'text'});
+  const container = document.getElementById("telescopicPoem");
+  container.appendChild(telescopicContent);
+</script>
 
 <div id="telescopicPoem"></div>
 <script>
