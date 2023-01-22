@@ -4,28 +4,40 @@
 }
 
 body {
-    background-image: url("gifs/heartrainbow.gif");
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: cover;
     padding: 50px 50px 75px;
 }
 
+body.home {
+    background-image: url("gifs/heartrainbow.gif");
+}
+
+body.aboutme {
+    background-image: url("gifs/heartcloudbg.gif");
+}
+
+body.math {
+  background-image: url("gifs/pinkcastle.gif");
+}
+
 .p1{
     font-family: computer;
 }
 
+/*https://www.w3schools.com/css/css3_buttons.asp*/
 a:link, a:visited {
-    background-color: #f44336;
-    color: white;
-    padding: 14px 25px;
+    background-color: #000000;
+    color: rgb(255, 121, 121);
     text-align: center;
     text-decoration: none;
     display: inline-block;
   }
   
   a:hover, a:active {
-    background-color: red;
+    background-color: rgb(151, 128, 255);
   }
 
 table {
@@ -38,3 +50,39 @@ table {
     text-align: left;
     border-bottom: 1px solid rgb(156, 233, 233);
   }
+
+a.fancyfont {
+  background-color: #fff41d00
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: rgb(184, 112, 255);
+  }
+  
+.topnav a {
+    float: left;
+    background-color: rgb(184, 112, 255);
+    color: #ffc8c8;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+.topnav a:hover {
+    background-color: #ffc8c8;
+    color: brgb(184, 112, 255);
+  }
+  
+.topnav a.active {
+    background-color: #5f74f9;
+    color: #ffc8c8;
+  }
+
+#pinkpurplegradbg {
+    background: #F58989;
+    background: -moz-radial-gradient(center, #F58989 0%, #AAA0F0 58%, #7DE1F0 100%);
+    background: -webkit-radial-gradient(center, #F58989 0%, #AAA0F0 58%, #7DE1F0 100%);
+    background: radial-gradient(ellipse at center, #F58989 0%, #AAA0F0 58%, #7DE1F0 100%);
+}
