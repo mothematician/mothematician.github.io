@@ -3,12 +3,25 @@
     src: url(basiic.ttf);
 }
 
+@font-face {
+  font-family: pixel;
+  src: url(pixel_operator/PixelOperator.ttf);
+}
+@font-face {
+  font-family: pixel;
+  src: url(pixel_operator/PixelOperator-Bold.ttf);
+  font-weight: bold;
+}
+
+
 body {
+    margin: 0px;
+    padding: 50px 50px 75px;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: cover;
-    padding: 50px 50px 75px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 body.home {
@@ -23,11 +36,34 @@ body.math {
   background-image: url("gifs/pinkcastle.gif");
 }
 
-.p1{
-    font-family: computer;
+body.windows {
+  background-image: url("gifs/heartrainbow.gif");
+  font-family: pixel;
 }
 
+.p1{
+    font-family: computer;
+    margin: 10px
+}
+
+.p2{
+  margin: 10px;
+  font-family: pixel;
+  font-size: medium;
+}
+
+
 /*https://www.w3schools.com/css/css3_buttons.asp*/
+
+a.n {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+a.n:hover {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
 a.external:link, a.external:visited {
     background-color: #000000;
     color: rgb(255, 121, 121);
@@ -78,6 +114,11 @@ a.fancyfont {
 .topnav a.active {
     background-color: #5f74f9;
     color: #ffc8c8;
+  }
+
+.youtube-video {
+    aspect-ratio: 16 / 9;
+    width: 100%;
   }
 
 #pinkpurplegradbg {
