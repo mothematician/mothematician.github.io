@@ -37,7 +37,8 @@ body.math {
 }
 
 body.windows {
-  background-image: url("gifs/heartrainbow.gif");
+  /*background-image: url("rainbowbg.png"):*/
+  background-color: rgb(4,127,126);
   font-family: pixel;
 }
 
