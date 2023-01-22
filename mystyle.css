@@ -1,0 +1,13 @@
+@font-face {
+    font-family: computer;
+    src: url(basiic.ttf);
+}
+body {
+    background-image: url("gifs/heartrainbow.gif");
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: cover;
+}
+.p1{
+    font-family: computer;
+}
