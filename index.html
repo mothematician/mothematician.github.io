@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Name — Academic Homepage</title>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.min.css" />
+  <style>
+    body {
+      max-width: 860px;
+    }
+    .profile-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .profile-header img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid #ccc;
+    }
+    .profile-header .bio {
+      flex: 1;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.2rem;
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      font-size: 0.9rem;
+    }
+    .contact-links li::before {
+      content: none;
+    }
+    .pub-list {
+      padding-left: 0;
+    }
+    .pub-list li {
+      margin-bottom: 1rem;
+    }
+    .pub-venue {
+      font-style: italic;
+      color: #555;
+    }
+    .pub-links {
+      font-size: 0.85rem;
+    }
+    .pub-links a {
+      margin-right: 0.6rem;
+    }
+    .news-list {
+      padding-left: 0;
+    }
+    .news-list li {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .news-list li::before {
+      content: none;
+    }
+    .news-date {
+      min-width: 90px;
+      color: #777;
+      font-size: 0.88rem;
+      padding-top: 0.05rem;
+    }
+    footer {
+      margin-top: 4rem;
+      font-size: 0.82rem;
+      color: #888;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Your Name</h1>
+    <p class="author">PhD Candidate · Department of Mathematics · University Name</p>
+  </header>
+
+  <main>
+
+    <!-- Profile -->
+    <div class="profile-header">
+      <!-- Replace src with your actual photo path, e.g. assets/photo.jpg -->
+      <img src="https://via.placeholder.com/140" alt="Profile photo of Your Name" />
+      <div class="bio">
+        <p>
+          I am a PhD candidate in the Department of Mathematics at University Name,
+          advised by <a href="#">Prof. Advisor Name</a>.
+          My research focuses on [your research area], with particular interest in
+          [specific topic 1] and [specific topic 2].
+        </p>
+        <p>
+          Before my PhD, I completed my BSc in Mathematics at [Undergraduate University].
+          I am currently on the job market for [position type].
+        </p>
+        <ul class="contact-links">
+          <li>📧 <a href="mailto:you@university.edu">you@university.edu</a></li>
+          <li>🎓 <a href="https://scholar.google.com" target="_blank">Google Scholar</a></li>
+          <li>🐙 <a href="https://github.com/mathematician" target="_blank">GitHub</a></li>
+          <li>🔗 <a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+          <li>📄 <a href="assets/cv.pdf" target="_blank">CV (PDF)</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr />
+
+    <!-- News -->
+    <section id="news">
+      <h2>News</h2>
+      <ul class="news-list">
+        <li>
+          <span class="news-date">Jun 2026</span>
+          <span>Paper accepted at [Conference Name].</span>
+        </li>
+        <li>
+          <span class="news-date">Mar 2026</span>
+          <span>Presented at [Workshop/Seminar Name].</span>
+        </li>
+        <li>
+          <span class="news-date">Sep 2025</span>
+          <span>Started PhD at [University Name].</span>
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <!-- Research / Publications -->
+    <section id="publications">
+      <h2>Publications</h2>
+
+      <h3>Preprints</h3>
+      <ol class="pub-list">
+        <li>
+          <strong>Title of Your Preprint Paper</strong><br />
+          <u>Your Name</u>, Co-author Name, Another Author.<br />
+          <span class="pub-venue">arXiv preprint, 2026.</span><br />
+          <span class="pub-links">
+            <a href="#">[arXiv]</a>
+            <a href="#">[PDF]</a>
+            <a href="#">[Code]</a>
+          </span>
+        </li>
+      </ol>
+
+      <h3>Conference Papers</h3>
+      <ol class="pub-list">
+        <li>
+          <strong>Title of Your Conference Paper</strong><br />
+          <u>Your Name</u>, Co-author Name.<br />
+          <span class="pub-venue">Proceedings of [Conference Name] (CONF), 2025.</span><br />
+          <span class="pub-links">
+            <a href="#">[Paper]</a>
+            <a href="#">[Slides]</a>
+            <a href="#">[Poster]</a>
+          </span>
+        </li>
+      </ol>
+    </section>
+
+    <hr />
+
+    <!-- Teaching -->
+    <section id="teaching">
+      <h2>Teaching</h2>
+      <ul>
+        <li><strong>[MATH 101] Calculus I</strong> — Teaching Assistant, Fall 2025</li>
+        <li><strong>[MATH 202] Linear Algebra</strong> — Teaching Assistant, Spring 2025</li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <!-- Talks & Misc -->
+    <section id="talks">
+      <h2>Talks &amp; Presentations</h2>
+      <ul>
+        <li>
+          <em>[Talk Title]</em>, [Conference/Seminar Name], [City], [Month Year].
+          <a href="#">[Slides]</a>
+        </li>
+        <li>
+          <em>[Talk Title]</em>, [Department Seminar], [University], [Month Year].
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    Last updated: June 2026 ·
+    Design based on <a href="https://latex.vercel.app" target="_blank">LaTeX.css</a>
+    by Vincent Dörig.
+  </footer>
+
+</body>
+</html>
