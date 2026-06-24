@@ -9,6 +9,7 @@
   <style>
     body {
       max-width: 860px;
+      position: relative;
     }
     .profile-header {
       display: flex;
@@ -79,10 +80,28 @@
       border-top: 1px solid #ddd;
       padding-top: 1rem;
     }
+
+    /* dark mode */
+    .dark-toggle {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: 1px solid currentColor;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.5rem;
+      line-height: 1.4;
+      font-family: inherit;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
   </style>
 </head>
 <body>
 
+  <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">dark</button>
   <header>
     <h1>Monica Sing</h1>
     <p class="author">Undergraduate (CO'27) · Department of Mathematics · Princeton University</p>
@@ -263,5 +282,12 @@
     by Vincent Dörig.
   </footer>
 
+<script>
+  const toggle = document.querySelector("#dark-mode-toggle");
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle("latex-dark");
+    toggle.textContent = document.body.classList.contains("latex-dark") ? "light" : "dark";
+  });
+</script>
 </body>
 </html>
