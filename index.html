@@ -87,21 +87,20 @@
       top: 1.5rem;
       right: 1.5rem;
       background: none;
-      border: 1px solid currentColor;
-      border-radius: 4px;
+      border: none;
       cursor: pointer;
-      font-size: 0.85rem;
-      padding: 0.2rem 0.5rem;
-      line-height: 1.4;
-      font-family: inherit;
-      opacity: 1 !important;
-      visibility: visible !important;
+      font-size: 1.4rem;
+      padding: 0;
+      line-height: 1;
+      color: unset;
+      -webkit-text-fill-color: unset;
     }
   </style>
 </head>
 <body>
 
-  <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">dark</button>
+  <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+
   <header>
     <h1>Monica Sing</h1>
     <p class="author">Undergraduate (CO'27) · Department of Mathematics · Princeton University</p>
@@ -120,8 +119,7 @@
           Recently, I've been interested in a wide range of topics in low-dimensional topology, including but not limited to Knot Theory and 3-, 4-manifold Theory. 
         </p>
         <p>
-          Outside of math, I enjoy singing (Old NasSoul acapella), traveling, boxing, cooking, various forms of skating
-          <label for="sn-1" class="sidenote-toggle sidenote-number"></label>
+          Outside of math, I enjoy singing (Old NasSoul acapella), traveling, boxing, cooking, various forms of skating<label for="sn-1" class="sidenote-toggle sidenote-number"></label>
           <input type="checkbox" id="sn-1" class="sidenote-toggle" />
           <span class="sidenote">I managed to do an Ollie in 9th grade.</span>,
           various forms of visual arts (graphic design, bookmaking, junkjournaling), and working at makerspaces.
@@ -286,7 +284,7 @@
   const toggle = document.querySelector("#dark-mode-toggle");
   toggle.addEventListener('click', () => {
     document.body.classList.toggle("latex-dark");
-    toggle.textContent = document.body.classList.contains("latex-dark") ? "light" : "dark";
+    toggle.textContent = document.body.classList.contains("latex-dark") ? "☀️" : "🌙";
   });
 </script>
 </body>
