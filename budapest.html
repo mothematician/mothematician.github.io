@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monica Sing — Budapest</title>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    /* ── reset body for full layout ── */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      max-width: unset;
+    }
+
+    /* ── top bar ── */
+    .topbar {
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.4rem;
+      border-bottom: 1px solid #e0e0e0;
+      background: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .latex-dark .topbar {
+      background: #1a1a1a;
+      border-bottom-color: #333;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .topbar h1 {
+      font-size: 1rem;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .topbar .back-link {
+      font-size: 0.82rem;
+      color: hotpink;
+      text-decoration: none;
+    }
+    .topbar .back-link:hover { text-decoration: underline; }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .dark-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0;
+      line-height: 1;
+    }
+
+    /* ── main split layout ── */
+    .layout {
+      display: flex;
+      height: calc(100vh - 52px);
+    }
+
+    /* ── side panel ── */
+    .sidebar {
+      width: 320px;
+      flex-shrink: 0;
+      overflow-y: auto;
+      border-right: 1px solid #e0e0e0;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .latex-dark .sidebar {
+      background: #1a1a1a;
+      border-right-color: #333;
+    }
+
+    .sidebar-header {
+      padding: 1rem 1.2rem 0.6rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .latex-dark .sidebar-header {
+      border-bottom-color: #2a2a2a;
+    }
+
+    .sidebar-header p {
+      margin: 0;
+      font-size: 0.8rem;
+      color: #888;
+      line-height: 1.4;
+    }
+
+    /* filter pills */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      padding: 0.75rem 1.2rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .latex-dark .filter-bar {
+      border-bottom-color: #2a2a2a;
+    }
+
+    .filter-btn {
+      background: none;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 0.18rem 0.65rem;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: inherit;
+      color: inherit;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: #fff0f6;
+      border-color: hotpink;
+      color: palevioletred;
+    }
+
+    .latex-dark .filter-btn { border-color: #444; }
+    .latex-dark .filter-btn:hover,
+    .latex-dark .filter-btn.active {
+      background: #2a1520;
+      border-color: hotpink;
+      color: hotpink;
+    }
+
+    /* place cards list */
+    .cards-list {
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .place-card {
+      border: 1px solid #e8e8e8;
+      border-left: 3px solid transparent;
+      border-radius: 5px;
+      padding: 0.75rem 0.9rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+
+    .latex-dark .place-card {
+      border-color: #2e2e2e;
+      border-left-color: transparent;
+    }
+
+    .place-card:hover,
+    .place-card.active {
+      border-left-color: hotpink;
+      border-color: #f0c0d0;
+      background: #fff7fb;
+    }
+
+    .latex-dark .place-card:hover,
+    .latex-dark .place-card.active {
+      border-left-color: hotpink;
+      border-color: #4a2030;
+      background: #221218;
+    }
+
+    .place-card.hidden { display: none; }
+
+    .card-name {
+      font-weight: bold;
+      font-size: 0.88rem;
+      margin: 0 0 0.25rem;
+    }
+
+    .card-category {
+      font-size: 0.72rem;
+      color: palevioletred;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin: 0 0 0.35rem;
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: #555;
+      margin: 0;
+      line-height: 1.45;
+    }
+
+    .latex-dark .card-desc { color: #aaa; }
+
+    /* ── map ── */
+    #map {
+      flex: 1;
+      z-index: 0;
+    }
+
+    /* custom pink marker */
+    .pink-marker {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: hotpink;
+      border: 2.5px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    .pink-marker.active-marker {
+      background: #fff;
+      border-color: hotpink;
+      box-shadow: 0 0 0 3px hotpink;
+    }
+
+    /* leaflet popup */
+    .leaflet-popup-content-wrapper {
+      border-radius: 5px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .leaflet-popup-content { margin: 0.6rem 0.8rem; }
+    .popup-name { font-weight: bold; margin: 0 0 0.2rem; }
+    .popup-cat { color: palevioletred; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <a class="back-link" href="index.html">← Monica Sing</a>
+      <h1>Budapest</h1>
+    </div>
+    <div class="topbar-right">
+      <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">🌚</button>
+    </div>
+  </div>
+
+  <!-- Split layout -->
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <p>Places I loved during BSM (Jan–May 2026) and the topology conference in June.</p>
+      </div>
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="café">☕ Café</button>
+        <button class="filter-btn" data-filter="study">📐 Study</button>
+        <button class="filter-btn" data-filter="outdoor">🌿 Outdoor</button>
+        <button class="filter-btn" data-filter="art">🎨 Art</button>
+        <button class="filter-btn" data-filter="hidden gem">✨ Hidden gem</button>
+      </div>
+
+      <div class="cards-list" id="cards-list"></div>
+    </div>
+
+    <!-- Map -->
+    <div id="map"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // ── DATA ──────────────────────────────────────────────
+    // Replace lat/lng with real coords from Google Maps (right-click → copy coords)
+    const places = [
+      {
+        name: "Massolit Books & Café",
+        category: "café",
+        description: "Secondhand English bookshop with excellent coffee and a tiny garden. My go-to for long afternoons with a topology textbook.",
+        lat: 47.5089,
+        lng: 19.0513
+      },
+      {
+        name: "BSM — Budapest Semesters in Mathematics",
+        category: "study",
+        description: "The whole reason I came. The faculty are incredible and the student lounge whiteboard is always covered in something interesting.",
+        lat: 47.4988,
+        lng: 19.0630
+      },
+      {
+        name: "Margit-sziget (Margaret Island)",
+        category: "outdoor",
+        description: "Car-free island in the middle of the Danube. I'd go here to run, read, or just sit by the water and do nothing for a while.",
+        lat: 47.5258,
+        lng: 19.0467
+      }
+    ];
+
+    // ── MAP SETUP ─────────────────────────────────────────
+    const map = L.map('map', { zoomControl: true }).setView([47.505, 19.055], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> France © OpenStreetMap',
+      maxZoom: 20
+    }).addTo(map);
+
+    // ── BUILD CARDS + MARKERS ─────────────────────────────
+    const cardsList = document.getElementById('cards-list');
+    const markers = [];
+    let activeIndex = null;
+
+    function makeMarkerIcon(active = false) {
+      return L.divIcon({
+        className: '',
+        html: `<div class="pink-marker${active ? ' active-marker' : ''}"></div>`,
+        iconSize: [14, 14],
+        iconAnchor: [7, 7],
+        popupAnchor: [0, -10]
+      });
+    }
+
+    function setActive(i) {
+      // deactivate previous
+      if (activeIndex !== null) {
+        document.querySelectorAll('.place-card')[activeIndex]?.classList.remove('active');
+        markers[activeIndex]?.setIcon(makeMarkerIcon(false));
+      }
+      activeIndex = i;
+      document.querySelectorAll('.place-card')[i]?.classList.add('active');
+      markers[i]?.setIcon(makeMarkerIcon(true));
+    }
+
+    places.forEach((p, i) => {
+      // card
+      const card = document.createElement('div');
+      card.className = 'place-card';
+      card.dataset.category = p.category;
+      card.innerHTML = `
+        <p class="card-name">${p.name}</p>
+        <p class="card-category">${p.category}</p>
+        <p class="card-desc">${p.description}</p>
+      `;
+      card.addEventListener('click', () => {
+        setActive(i);
+        map.flyTo([p.lat, p.lng], 15, { duration: 0.8 });
+        markers[i].openPopup();
+      });
+      cardsList.appendChild(card);
+
+      // marker
+      const marker = L.marker([p.lat, p.lng], { icon: makeMarkerIcon() })
+        .addTo(map)
+        .bindPopup(`<p class="popup-name">${p.name}</p><p class="popup-cat">${p.category}</p>`);
+
+      marker.on('click', () => {
+        setActive(i);
+        // scroll card into view
+        const cards = document.querySelectorAll('.place-card');
+        cards[i]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+
+      markers.push(marker);
+    });
+
+    // ── FILTER ───────────────────────────────────────────
+    document.getElementById('filter-bar').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.place-card').forEach((card, i) => {
+        const matches = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden', !matches);
+        if (matches) {
+          markers[i].addTo(map);
+        } else {
+          markers[i].remove();
+        }
+      });
+    });
+
+    // ── DARK MODE ─────────────────────────────────────────
+    const toggle = document.getElementById('dark-mode-toggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('latex-dark');
+      toggle.textContent = document.body.classList.contains('latex-dark') ? '🌝' : '🌚';
+    });
+  </script>
+</body>
+</html>
