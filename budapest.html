@@ -432,6 +432,41 @@
         lat: 47.238131896943315, 
         lng: 18.460611647297785
       },
+      {
+        name: "Tihany (Balaton)",
+        category: "outdoor",
+        description: "Peninsula of Lake Balaton, cute lavender town, very nice viewpoint of the lake next to the church.",
+        lat: 46.914329373092194, 
+        lng: 17.8874142411203
+      },
+      {
+        name: "Siófok (Balaton)",
+        category: "outdoor",
+        description: "Cute beachy town of Lake Balaton, very chill vibes, lots of people swimming in the summer.",
+        lat: 46.91204185348815, 
+        lng: 18.05172154082122
+      },
+      {
+        name: "Balatonfüred (Balaton)",
+        category: "outdoor",
+        description: "Very nice promenade right next to the lake.",
+        lat: 46.95350750924078, 
+        lng: 17.89401609495649
+      },
+      {
+        name: "Mamie Blue vintage",
+        category: "thrift",
+        description: "Very nice grandma and grandpa running a thrift store out of their basement. By far the cheapest leather jackets I've found (15,000 huf flat). Very much a hidden gem.",
+        lat: 47.50364295319455, 
+        lng: 19.06232428129684
+      },
+    //   {
+    //     name: "ReClaim Vintage",
+    //     category: "thrift",
+    //     description: "massive thrift store",
+    //     lat: 47.50105113078034, 
+    //     lng: 19.06148306989077
+    //   },
     //   {
     //     name: "",
     //     category: "",
@@ -444,7 +479,7 @@
     // ── MAP SETUP ─────────────────────────────────────────
     const map = L.map('map', { zoomControl: true }).setView([47.505, 19.055], 13);
 
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/dark_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> France © OpenStreetMap',
       maxZoom: 20
     }).addTo(map);
