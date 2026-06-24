@@ -245,7 +245,7 @@
   <!-- Top bar -->
   <div class="topbar">
     <div class="topbar-left">
-      <a class="back-link" href="index.html">← Monica Sing</a>
+      <a class="back-link" href="index.html">← Main Page</a>
       <h1>Budapest</h1>
     </div>
     <div class="topbar-right">
@@ -259,16 +259,17 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-header">
-        <p>Places I loved during BSM (Jan–May 2026) and the topology conference in June.</p>
+        <p>💕</p>
       </div>
 
       <div class="filter-bar" id="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="food">🍛 Food</button>
         <button class="filter-btn" data-filter="café">☕ Café</button>
         <button class="filter-btn" data-filter="study">📐 Study</button>
         <button class="filter-btn" data-filter="outdoor">🌿 Outdoor</button>
         <button class="filter-btn" data-filter="art">🎨 Art</button>
-        <button class="filter-btn" data-filter="hidden gem">✨ Hidden gem</button>
+        <!-- <button class="filter-btn" data-filter="hidden gem">✨ Hidden gems</button> -->
       </div>
 
       <div class="cards-list" id="cards-list"></div>
@@ -284,26 +285,159 @@
     // Replace lat/lng with real coords from Google Maps (right-click → copy coords)
     const places = [
       {
-        name: "Massolit Books & Café",
+        name: "Altair Teaház",
         category: "café",
-        description: "Secondhand English bookshop with excellent coffee and a tiny garden. My go-to for long afternoons with a topology textbook.",
-        lat: 47.5089,
-        lng: 19.0513
+        description: "Tea house with a very cool vibe, multi-level forts. I'd hang out or work for hours.",
+        lat: 47.49294035652152, 
+        lng: 19.063640944027266
       },
       {
-        name: "BSM — Budapest Semesters in Mathematics",
-        category: "study",
-        description: "The whole reason I came. The faculty are incredible and the student lounge whiteboard is always covered in something interesting.",
-        lat: 47.4988,
-        lng: 19.0630
+        name: "Special Soup House",
+        category: "food",
+        description: "Decent selection of Viet dishes, biggest pho portion I've had in Budapest. Tony is super funny and friendly.",
+        lat: 47.50291247213857, 
+        lng: 19.061097143831425
       },
       {
-        name: "Margit-sziget (Margaret Island)",
+        name: "Margit-sziget",
         category: "outdoor",
-        description: "Car-free island in the middle of the Danube. I'd go here to run, read, or just sit by the water and do nothing for a while.",
+        description: "Massive island, lots of festivals and events during the Summer.",
         lat: 47.5258,
         lng: 19.0467
-      }
+      },
+      {
+        name: "Mikrokosmos fagyizó",
+        category: "café",
+        description: "Unique ice cream flavours for similar prices as other meh places. Only discovered this towards the end :(",
+        lat: 47.479584313126026, 
+        lng: 19.049788783786834
+      },
+      {
+        name: "Main Playground in Városliget (City Park)",
+        category: "outdoor",
+        description: "The best playground I've been to. Has a swing+seesaw+spinny ride that was sooo insanely fun.",
+        lat: 47.51005888961379,
+        lng: 19.08592487914494
+      },
+      {
+        name: "Asian Street Food",
+        category: "food",
+        description: "We ate here quite often since it was close to school, claypot tastes great and is a huge portion.",
+        lat: 47.50197309291964, 
+        lng: 19.08601184315886
+      },
+      {
+        name: "PALACSINTÁS ROBY",
+        category: "food",
+        description: "Hungarian pancakes for ~1 USD each, lots of flavours and topics, very hole in the wall.",
+        lat: 47.49568598576718, 
+        lng: 19.07554583108255
+      },
+      {
+        name: "ISBN+",
+        category: "art",
+        description: "Unique book store selling a big collection of artbooks and more!",
+        lat: 47.48945851145334,
+        lng: 19.068727131610558
+      },
+      {
+        name: "KisPipacs Pékség",
+        category: ["café", "food"],
+        description: "The only thing I've gotten here is the duck liver croissant with pear and arugula (4x) but its so good.",
+        lat: 47.4909988721399, 
+        lng: 19.05683931076722
+      },
+      {
+        name: "Pho-Astoria Bistro",
+        category: "food",
+        description: "The cheapest Viet place I found, Noi style bun noodles has lots of meat.",
+        lat: 47.49391397649827,
+        lng: 19.057234943468107
+      },
+      {
+        name: "Paloma Artspace",
+        category: "art",
+        description: "A collection of art stores and studios! Lots of cool local and handmade souvenirs.",
+        lat: 47.49410473835632,
+        lng: 19.05779217885123
+      },
+      {
+        name: "arán bakery",
+        category: "café",
+        description: "Great sourdough loafs and nice pastries, not a lot of seating area though.",
+        lat: 47.49824116553458, 
+        lng: 19.06465132041156
+      },
+      {
+        name: "Hungarian Academy of Sciences",
+        category: "art",
+        description: "The most spectacular lecture hall (not generally open to public).",
+        lat: 47.5012569905732, 
+        lng: 19.04726684602103
+      },
+      {
+        name: "DELONTEA",
+        category: "café",
+        description: "Massive collection of teas from around the world, their Hojicha was quite good (I asked for less milk)! Very friendly staff.",
+        lat: 47.499371401216365,
+        lng: 19.062219839678527
+      },
+      {
+        name: "HUN-REN Alfréd Rényi Institute of Mathematics",
+        category: ["study","art"],
+        description: "I spent a good chunk of my semester in the library and chalkboards",
+        lat: 47.49321492904174,
+        lng: 19.059102609289923
+      },
+      {
+        name: "Citadel",
+        category: "outdoor",
+        description: "Insane views of the city during sunset and at night, probably during sunrise too. Do have to hike up.",
+        lat: 47.487135872463185, 
+        lng: 19.04603069065262
+      },
+      {
+        name: "Tóth Árpád stny.",
+        category: "outdoor",
+        description: "Pink flowers during spring line the walkway with a view of the Buda side.",
+        lat: 47.50154961084299,
+        lng: 19.031343567281922
+      },
+      {
+        name: "Népsziget",
+        category: ["outdoor", "food"],
+        description: "Cute island further up north, a bunch of riverside bars with a nice sunset view (albeit expensive).",
+        lat: 47.56270378542543, 
+        lng: 19.071852433090303
+      },
+      {
+        name: "Bian Garden",
+        category: ["outdoor", "food"],
+        description: "Cute asian street food market open during the summer",
+        lat: 47.48191516828102, 
+        lng: 19.120133818844987
+      },
+      {
+        name: "DunaPanda Supermarket",
+        category: "food",
+        description: "My beloved asian grocery store, massive selection and prices are probaly lowest among other asian stores in Budapest.",
+        lat: 47.480475521710424, 
+        lng: 19.12492169550698
+      },
+      {
+        name: "Bory Castle",
+        category: "art",
+        description: "Beautiful castle built by a Hungarian architect for his wife, basically his life's work. Had a lot of art inside too.",
+        lat: 47.238131896943315, 
+        lng: 18.460611647297785
+      },
+      {
+        name: "",
+        category: "",
+        description: "",
+        lat: 
+        lng: 
+      },
     ];
 
     // ── MAP SETUP ─────────────────────────────────────────
