@@ -246,7 +246,7 @@
   <div class="topbar">
     <div class="topbar-left">
       <a class="back-link" href="index.html">← Main Page</a>
-      <h1>Budapest</h1>
+      <h1>Favourite places in Hungary</h1>
     </div>
     <div class="topbar-right">
       <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">🌚</button>
@@ -269,6 +269,7 @@
         <button class="filter-btn" data-filter="study">📐 Study</button>
         <button class="filter-btn" data-filter="outdoor">🌿 Outdoor</button>
         <button class="filter-btn" data-filter="art">🎨 Art</button>
+        <button class="filter-btn" data-filter="thrift">👚 Thrifting</button>
         <!-- <button class="filter-btn" data-filter="hidden gem">✨ Hidden gems</button> -->
       </div>
 
@@ -443,7 +444,7 @@
     // ── MAP SETUP ─────────────────────────────────────────
     const map = L.map('map', { zoomControl: true }).setView([47.505, 19.055], 13);
 
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://tiles.stadiamaps.com/tiles/dark_all/{z}/{x}/{y}{r}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> France © OpenStreetMap',
       maxZoom: 20
     }).addTo(map);
