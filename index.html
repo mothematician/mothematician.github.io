@@ -98,7 +98,7 @@
 </head>
 <body>
 
-  <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">🌙</button>
+  <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">🌚</button>
 
   <header>
     <h1>Monica Sing</h1>
@@ -153,7 +153,8 @@
         </li>
         <li>
           <span class="news-date">Jun 2026</span>
-          <span>Geometry and Topology in Low Dimensions, Budapest, Hungary</span>
+          <span>Geometry and Topology in Low Dimensions, Budapest, Hungary<br />
+          <a href="assets/dog.jpg" target="_blank">[Takeaways - coming soon]</a></span>
         </li>
         <li>
           <span class="news-date">Jan-May 2026</span>
@@ -244,7 +245,7 @@
 
     <hr />
 
-    <section id="talks">
+    <section id="projects">
       <h2>Misc. Projects</h2>
       <ul>
         <li>
@@ -271,6 +272,16 @@
       </ul>
     </section>
 
+    <hr />
+
+    <section id="notes">
+      <h2>Notes</h2>
+      <ul>
+        <li><strong>BSM/ELTE Low-Dimensional Topology (Knot Theory)</strong> Uploading soon</li>
+        <!-- <li><strong>[MATH 202] Linear Algebra</strong> — Teaching Assistant, Spring 2025</li> -->
+      </ul>
+    </section>
+
   </main>
 
   <footer>
@@ -283,7 +294,7 @@
   const toggle = document.querySelector("#dark-mode-toggle");
   toggle.addEventListener('click', () => {
     document.body.classList.toggle("latex-dark");
-    toggle.textContent = document.body.classList.contains("latex-dark") ? "☀️" : "🌙";
+    toggle.textContent = document.body.classList.contains("latex-dark") ? "🌝" : "🌚";
   });
 </script>
 </body>
