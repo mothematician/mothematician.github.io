@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="https://latex.vercel.app/style.min.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
-    /* ── reset body for full layout ── */
     html, body {
       margin: 0;
       padding: 0;
@@ -15,7 +14,6 @@
       max-width: unset;
     }
 
-    /* ── top bar ── */
     .topbar {
       height: 52px;
       display: flex;
@@ -28,53 +26,17 @@
       top: 0;
       z-index: 1000;
     }
+    .latex-dark .topbar { background: #1a1a1a; border-bottom-color: #333; }
 
-    .latex-dark .topbar {
-      background: #1a1a1a;
-      border-bottom-color: #333;
-    }
-
-    .topbar-left {
-      display: flex;
-      align-items: baseline;
-      gap: 0.8rem;
-    }
-
-    .topbar h1 {
-      font-size: 1rem;
-      margin: 0;
-      font-weight: bold;
-    }
-
-    .topbar .back-link {
-      font-size: 0.82rem;
-      color: hotpink;
-      text-decoration: none;
-    }
+    .topbar-left { display: flex; align-items: baseline; gap: 0.8rem; }
+    .topbar h1 { font-size: 1rem; margin: 0; font-weight: bold; }
+    .topbar .back-link { font-size: 0.82rem; color: hotpink; text-decoration: none; }
     .topbar .back-link:hover { text-decoration: underline; }
+    .topbar-right { display: flex; align-items: center; gap: 0.8rem; }
+    .dark-toggle { background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 0; line-height: 1; }
 
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
+    .layout { display: flex; height: calc(100vh - 52px); }
 
-    .dark-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      padding: 0;
-      line-height: 1;
-    }
-
-    /* ── main split layout ── */
-    .layout {
-      display: flex;
-      height: calc(100vh - 52px);
-    }
-
-    /* ── side panel ── */
     .sidebar {
       width: 320px;
       flex-shrink: 0;
@@ -84,29 +46,12 @@
       display: flex;
       flex-direction: column;
     }
+    .latex-dark .sidebar { background: #1a1a1a; border-right-color: #333; }
 
-    .latex-dark .sidebar {
-      background: #1a1a1a;
-      border-right-color: #333;
-    }
+    .sidebar-header { padding: 1rem 1.2rem 0.6rem; border-bottom: 1px solid #f0f0f0; }
+    .latex-dark .sidebar-header { border-bottom-color: #2a2a2a; }
+    .sidebar-header p { margin: 0; font-size: 0.8rem; color: #888; line-height: 1.4; }
 
-    .sidebar-header {
-      padding: 1rem 1.2rem 0.6rem;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .latex-dark .sidebar-header {
-      border-bottom-color: #2a2a2a;
-    }
-
-    .sidebar-header p {
-      margin: 0;
-      font-size: 0.8rem;
-      color: #888;
-      line-height: 1.4;
-    }
-
-    /* filter pills */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
@@ -114,10 +59,7 @@
       padding: 0.75rem 1.2rem;
       border-bottom: 1px solid #f0f0f0;
     }
-
-    .latex-dark .filter-bar {
-      border-bottom-color: #2a2a2a;
-    }
+    .latex-dark .filter-bar { border-bottom-color: #2a2a2a; }
 
     .filter-btn {
       background: none;
@@ -130,28 +72,11 @@
       color: inherit;
       transition: background 0.15s, border-color 0.15s;
     }
-
-    .filter-btn:hover, .filter-btn.active {
-      background: #fff0f6;
-      border-color: hotpink;
-      color: palevioletred;
-    }
-
+    .filter-btn:hover, .filter-btn.active { background: #fff0f6; border-color: hotpink; color: palevioletred; }
     .latex-dark .filter-btn { border-color: #444; }
-    .latex-dark .filter-btn:hover,
-    .latex-dark .filter-btn.active {
-      background: #2a1520;
-      border-color: hotpink;
-      color: hotpink;
-    }
+    .latex-dark .filter-btn:hover, .latex-dark .filter-btn.active { background: #2a1520; border-color: hotpink; color: hotpink; }
 
-    /* place cards list */
-    .cards-list {
-      padding: 0.75rem 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
+    .cards-list { padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
 
     .place-card {
       border: 1px solid #e8e8e8;
@@ -161,41 +86,14 @@
       cursor: pointer;
       transition: border-color 0.15s, background 0.15s;
     }
-
-    .latex-dark .place-card {
-      border-color: #2e2e2e;
-      border-left-color: transparent;
-    }
-
-    .place-card:hover,
-    .place-card.active {
-      border-left-color: hotpink;
-      border-color: #f0c0d0;
-      background: #fff7fb;
-    }
-
-    .latex-dark .place-card:hover,
-    .latex-dark .place-card.active {
-      border-left-color: hotpink;
-      border-color: #4a2030;
-      background: #221218;
-    }
-
+    .latex-dark .place-card { border-color: #2e2e2e; border-left-color: transparent; }
+    .place-card:hover, .place-card.active { border-left-color: hotpink; border-color: #f0c0d0; background: #fff7fb; }
+    .latex-dark .place-card:hover, .latex-dark .place-card.active { border-left-color: hotpink; border-color: #4a2030; background: #221218; }
     .place-card.hidden { display: none; }
 
-    .card-name {
-      font-weight: bold;
-      font-size: 0.88rem;
-      margin: 0 0 0.25rem;
-    }
+    .card-name { font-weight: bold; font-size: 0.88rem; margin: 0 0 0.25rem; }
 
-    .card-category {
-      font-size: 0.72rem;
-      color: palevioletred;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin: 0 0 0.35rem;
-    }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 0.25rem; margin: 0 0 0.35rem; }
 
     .card-tag {
       font-size: 0.7rem;
@@ -206,50 +104,21 @@
       border-radius: 999px;
       padding: 0.1rem 0.5rem;
     }
- 
-    .latex-dark .card-tag {
-      background: #2a1520;
-      color: hotpink;
-    }
+    .latex-dark .card-tag { background: #2a1520; color: hotpink; }
 
-    .card-desc {
-      font-size: 0.8rem;
-      color: #555;
-      margin: 0;
-      line-height: 1.45;
-    }
-
+    .card-desc { font-size: 0.8rem; color: #555; margin: 0; line-height: 1.45; }
     .latex-dark .card-desc { color: #aaa; }
 
-    /* ── map ── */
-    #map {
-      flex: 1;
-      z-index: 0;
-    }
+    #map { flex: 1; z-index: 0; }
 
-    /* custom pink marker */
     .pink-marker {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: hotpink;
-      border: 2.5px solid #fff;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: hotpink; border: 2.5px solid #fff;
       box-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
+    .pink-marker.active-marker { background: #fff; border-color: hotpink; box-shadow: 0 0 0 3px hotpink; }
 
-    .pink-marker.active-marker {
-      background: #fff;
-      border-color: hotpink;
-      box-shadow: 0 0 0 3px hotpink;
-    }
-
-    /* leaflet popup */
-    .leaflet-popup-content-wrapper {
-      border-radius: 5px;
-      font-family: inherit;
-      font-size: 0.82rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
+    .leaflet-popup-content-wrapper { border-radius: 5px; font-family: inherit; font-size: 0.82rem; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
     .leaflet-popup-content { margin: 0.6rem 0.8rem; }
     .popup-name { font-weight: bold; margin: 0 0 0.2rem; }
     .popup-cat { color: palevioletred; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin: 0; }
@@ -257,7 +126,6 @@
 </head>
 <body>
 
-  <!-- Top bar -->
   <div class="topbar">
     <div class="topbar-left">
       <a class="back-link" href="index.html">← Main Page</a>
@@ -268,15 +136,9 @@
     </div>
   </div>
 
-  <!-- Split layout -->
   <div class="layout">
-
-    <!-- Sidebar -->
     <div class="sidebar">
-      <div class="sidebar-header">
-        <p>💕</p>
-      </div>
-
+      <div class="sidebar-header"><p>💕</p></div>
       <div class="filter-bar" id="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="food">🍛 Food</button>
@@ -285,33 +147,27 @@
         <button class="filter-btn" data-filter="outdoor">🌿 Outdoor</button>
         <button class="filter-btn" data-filter="art">🎨 Art</button>
         <button class="filter-btn" data-filter="thrift">👚 Thrifting</button>
-        <!-- <button class="filter-btn" data-filter="hidden gem">✨ Hidden gems</button> -->
       </div>
-
       <div class="cards-list" id="cards-list"></div>
     </div>
-
-    <!-- Map -->
     <div id="map"></div>
   </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    // ── DATA ──────────────────────────────────────────────
-    // Replace lat/lng with real coords from Google Maps (right-click → copy coords)
     const places = [
       {
         name: "Altair Teaház",
         category: "café",
         description: "Tea house with a very cool vibe, multi-level forts. I'd hang out or work for hours.",
-        lat: 47.49294035652152, 
+        lat: 47.49294035652152,
         lng: 19.063640944027266
       },
       {
         name: "Special Soup House",
         category: "food",
         description: "Decent selection of Viet dishes, biggest pho portion I've had in Budapest. Tony is super funny and friendly.",
-        lat: 47.50291247213857, 
+        lat: 47.50291247213857,
         lng: 19.061097143831425
       },
       {
@@ -325,7 +181,7 @@
         name: "Mikrokosmos fagyizó",
         category: "café",
         description: "Unique ice cream flavours for similar prices as other meh places. Only discovered this towards the end :(",
-        lat: 47.479584313126026, 
+        lat: 47.479584313126026,
         lng: 19.049788783786834
       },
       {
@@ -339,14 +195,14 @@
         name: "Asian Street Food",
         category: "food",
         description: "We ate here quite often since it was close to school, claypot tastes great and is a huge portion.",
-        lat: 47.50197309291964, 
+        lat: 47.50197309291964,
         lng: 19.08601184315886
       },
       {
         name: "PALACSINTÁS ROBY",
         category: "food",
         description: "Hungarian pancakes for ~1 USD each, lots of flavours and topics, very hole in the wall.",
-        lat: 47.49568598576718, 
+        lat: 47.49568598576718,
         lng: 19.07554583108255
       },
       {
@@ -360,7 +216,7 @@
         name: "KisPipacs Pékség",
         category: ["café", "food"],
         description: "The only thing I've gotten here is the duck liver croissant with pear and arugula (4x) but its so good.",
-        lat: 47.4909988721399, 
+        lat: 47.4909988721399,
         lng: 19.05683931076722
       },
       {
@@ -381,14 +237,14 @@
         name: "arán bakery",
         category: "café",
         description: "Great sourdough loafs and nice pastries, not a lot of seating area though.",
-        lat: 47.49824116553458, 
+        lat: 47.49824116553458,
         lng: 19.06465132041156
       },
       {
         name: "Hungarian Academy of Sciences",
         category: "art",
         description: "The most spectacular lecture hall (not generally open to public).",
-        lat: 47.5012569905732, 
+        lat: 47.5012569905732,
         lng: 19.04726684602103
       },
       {
@@ -409,7 +265,7 @@
         name: "Citadel",
         category: "outdoor",
         description: "Insane views of the city during sunset and at night, probably during sunrise too. Do have to hike up.",
-        lat: 47.487135872463185, 
+        lat: 47.487135872463185,
         lng: 19.04603069065262
       },
       {
@@ -423,83 +279,68 @@
         name: "Népsziget",
         category: ["outdoor", "food"],
         description: "Cute island further up north, a bunch of riverside bars with a nice sunset view (albeit expensive).",
-        lat: 47.56270378542543, 
+        lat: 47.56270378542543,
         lng: 19.071852433090303
       },
       {
         name: "Bian Garden",
         category: ["outdoor", "food"],
         description: "Cute asian street food market open during the summer",
-        lat: 47.48191516828102, 
+        lat: 47.48191516828102,
         lng: 19.120133818844987
       },
       {
         name: "DunaPanda Supermarket",
         category: "food",
         description: "My beloved asian grocery store, massive selection and prices are probaly lowest among other asian stores in Budapest.",
-        lat: 47.480475521710424, 
+        lat: 47.480475521710424,
         lng: 19.12492169550698
       },
       {
         name: "Bory Castle",
         category: "art",
         description: "Beautiful castle built by a Hungarian architect for his wife, basically his life's work. Had a lot of art inside too.",
-        lat: 47.238131896943315, 
+        lat: 47.238131896943315,
         lng: 18.460611647297785
       },
       {
         name: "Tihany (Balaton)",
         category: "outdoor",
         description: "Peninsula of Lake Balaton, cute lavender town, very nice viewpoint of the lake next to the church.",
-        lat: 46.914329373092194, 
+        lat: 46.914329373092194,
         lng: 17.8874142411203
       },
       {
         name: "Siófok (Balaton)",
         category: "outdoor",
         description: "Cute beachy town of Lake Balaton, very chill vibes, lots of people swimming in the summer.",
-        lat: 46.91204185348815, 
+        lat: 46.91204185348815,
         lng: 18.05172154082122
       },
       {
         name: "Balatonfüred (Balaton)",
         category: "outdoor",
         description: "Very nice promenade right next to the lake.",
-        lat: 46.95350750924078, 
+        lat: 46.95350750924078,
         lng: 17.89401609495649
       },
       {
         name: "Mamie Blue vintage",
         category: "thrift",
         description: "Very nice grandma and grandpa running a thrift store out of their basement. By far the cheapest leather jackets I've found (15,000 huf flat). Very much a hidden gem.",
-        lat: 47.50364295319455, 
+        lat: 47.50364295319455,
         lng: 19.06232428129684
       },
-    //   {
-    //     name: "ReClaim Vintage",
-    //     category: "thrift",
-    //     description: "massive thrift store",
-    //     lat: 47.50105113078034, 
-    //     lng: 19.06148306989077
-    //   },
-    //   {
-    //     name: "",
-    //     category: "",
-    //     description: "",
-    //     lat: 
-    //     lng: 
-    //   },
     ];
 
-    // ── MAP SETUP ─────────────────────────────────────────
+    // ── MAP ───────────────────────────────────────────────
     const map = L.map('map', { zoomControl: true }).setView([47.505, 19.055], 13);
-
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> France © OpenStreetMap',
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
       maxZoom: 20
     }).addTo(map);
 
-    // ── BUILD CARDS + MARKERS ─────────────────────────────
+    // ── MARKERS + CARDS ───────────────────────────────────
     const cardsList = document.getElementById('cards-list');
     const markers = [];
     let activeIndex = null;
@@ -508,14 +349,11 @@
       return L.divIcon({
         className: '',
         html: `<div class="pink-marker${active ? ' active-marker' : ''}"></div>`,
-        iconSize: [14, 14],
-        iconAnchor: [7, 7],
-        popupAnchor: [0, -10]
+        iconSize: [14, 14], iconAnchor: [7, 7], popupAnchor: [0, -10]
       });
     }
 
     function setActive(i) {
-      // deactivate previous
       if (activeIndex !== null) {
         document.querySelectorAll('.place-card')[activeIndex]?.classList.remove('active');
         markers[activeIndex]?.setIcon(makeMarkerIcon(false));
@@ -526,13 +364,16 @@
     }
 
     places.forEach((p, i) => {
+      // normalise to array
+      const cats = Array.isArray(p.category) ? p.category : [p.category];
+
       // card
       const card = document.createElement('div');
       card.className = 'place-card';
-      card.dataset.category = p.category;
+      card.dataset.categories = JSON.stringify(cats);
       card.innerHTML = `
         <p class="card-name">${p.name}</p>
-        <p class="card-category">${p.category}</p>
+        <div class="card-tags">${cats.map(c => `<span class="card-tag">${c}</span>`).join('')}</div>
         <p class="card-desc">${p.description}</p>
       `;
       card.addEventListener('click', () => {
@@ -545,19 +386,15 @@
       // marker
       const marker = L.marker([p.lat, p.lng], { icon: makeMarkerIcon() })
         .addTo(map)
-        .bindPopup(`<p class="popup-name">${p.name}</p><p class="popup-cat">${p.category}</p>`);
-
+        .bindPopup(`<p class="popup-name">${p.name}</p><p class="popup-cat">${cats.join(', ')}</p>`);
       marker.on('click', () => {
         setActive(i);
-        // scroll card into view
-        const cards = document.querySelectorAll('.place-card');
-        cards[i]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        document.querySelectorAll('.place-card')[i]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
-
       markers.push(marker);
     });
 
-    // ── FILTER ───────────────────────────────────────────
+    // ── FILTER ────────────────────────────────────────────
     document.getElementById('filter-bar').addEventListener('click', e => {
       const btn = e.target.closest('.filter-btn');
       if (!btn) return;
@@ -565,31 +402,26 @@
       btn.classList.add('active');
       const filter = btn.dataset.filter;
       document.querySelectorAll('.place-card').forEach((card, i) => {
-        const matches = filter === 'all' || card.dataset.category === filter;
+        const cats = JSON.parse(card.dataset.categories);
+        const matches = filter === 'all' || cats.includes(filter);
         card.classList.toggle('hidden', !matches);
-        if (matches) {
-          markers[i].addTo(map);
-        } else {
-          markers[i].remove();
-        }
+        if (matches) markers[i].addTo(map);
+        else markers[i].remove();
       });
     });
 
     // ── DARK MODE ─────────────────────────────────────────
     const toggle = document.getElementById('dark-mode-toggle');
-
     if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('latex-dark');
-    toggle.textContent = '🌝';
+      document.body.classList.add('latex-dark');
+      toggle.textContent = '🌝';
     }
-
     toggle.addEventListener('click', () => {
-    document.body.classList.toggle('latex-dark');
-    const isDark = document.body.classList.contains('latex-dark');
-    toggle.textContent = isDark ? '🌝' : '🌚';
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      document.body.classList.toggle('latex-dark');
+      const isDark = document.body.classList.contains('latex-dark');
+      toggle.textContent = isDark ? '🌝' : '🌚';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
-    
   </script>
 </body>
 </html>
