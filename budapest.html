@@ -197,6 +197,21 @@
       margin: 0 0 0.35rem;
     }
 
+    .card-tag {
+      font-size: 0.7rem;
+      color: palevioletred;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: #fff0f6;
+      border-radius: 999px;
+      padding: 0.1rem 0.5rem;
+    }
+ 
+    .latex-dark .card-tag {
+      background: #2a1520;
+      color: hotpink;
+    }
+
     .card-desc {
       font-size: 0.8rem;
       color: #555;
@@ -385,7 +400,7 @@
       },
       {
         name: "HUN-REN Alfréd Rényi Institute of Mathematics",
-        category: ["study","art"],
+        category: ["study", "art"],
         description: "I spent a good chunk of my semester in the library and chalkboards",
         lat: 47.49321492904174,
         lng: 19.059102609289923
@@ -562,10 +577,19 @@
 
     // ── DARK MODE ─────────────────────────────────────────
     const toggle = document.getElementById('dark-mode-toggle');
+
+    if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('latex-dark');
+    toggle.textContent = '🌝';
+    }
+
     toggle.addEventListener('click', () => {
-      document.body.classList.toggle('latex-dark');
-      toggle.textContent = document.body.classList.contains('latex-dark') ? '🌝' : '🌚';
+    document.body.classList.toggle('latex-dark');
+    const isDark = document.body.classList.contains('latex-dark');
+    toggle.textContent = isDark ? '🌝' : '🌚';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
+    
   </script>
 </body>
 </html>
