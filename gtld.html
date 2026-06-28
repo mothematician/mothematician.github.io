@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monica Sing — Academic Homepage</title>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.min.css" />
+  <script>
+    MathJax = {
+        tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      max-width: 860px;
+      position: relative;
+    }
+    .profile-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .profile-header img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid #ccc;
+    }
+    .profile-header .bio {
+      flex: 1;
+    }
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.2rem;
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 0;
+      font-size: 0.9rem;
+    }
+    .contact-links li::before {
+      content: none;
+    }
+    .pub-list {
+      padding-left: 0;
+    }
+    .pub-list li {
+      margin-bottom: 1rem;
+    }
+    .pub-venue {
+      font-style: italic;
+      color: #555;
+    }
+    .pub-links {
+      font-size: 0.85rem;
+    }
+    .pub-links a {
+      margin-right: 0.6rem;
+    }
+    .news-list {
+      padding-left: 0;
+    }
+    .news-list li {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .news-list li::before {
+      content: none;
+    }
+    .news-date {
+      min-width: 90px;
+      color: #777;
+      font-size: 0.88rem;
+      padding-top: 0.05rem;
+    }
+    footer {
+      margin-top: 4rem;
+      font-size: 0.82rem;
+      color: #888;
+      border-top: 1px solid #ddd;
+      padding-top: 1rem;
+    }
+    a {
+      color: hotpink;
+    }
+
+    a:visited {
+      color: palevioletred;
+    }
+
+    /* dark mode */
+    .dark-toggle {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.4rem;
+      padding: 0;
+      line-height: 1;
+      color: unset;
+      -webkit-text-fill-color: unset;
+    }
+
+    .latex-dark a {
+      color: #ff69b4;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="dark-mode-toggle" class="dark-toggle" aria-label="Toggle dark mode">🌚</button>
+
+  <header>
+    <h1>Geometry and Topology in Low Dimensions: <em>Notes and Takeaways</em></h1>
+    <h2>Budapest, June 2026</h2>
+    <p>Collection of new/new-ish definitions, theorems and questions I learnt during the conference.</p>
+  </header>
+
+  <main>
+
+    <hr />
+
+    <section id="exotica">
+      <h2>Day 1: Exotica</h2>
+      <div class="definition">Cobordism</div> (mainly from wikipedia) $\omega$
+      <div class="definition">H-cobordism</div> 
+      <div class="definition">Symplectic manifolds</div> 
+      <div class="definition">Exotica</div> 
+      <div class="definition">Exotic pair relative to f</div> 
+      <div class="definition">Fake</div> \(m^e \Sigma_{i=1}\)
+    </section>
+
+    <hr />
+
+    <section id="symplectic">
+      <h2>Day 2: Symplectic</h2>
+    </section>
+
+    <hr />
+
+    <section id="heegaard">
+      <h2>Day 3: Heegaard Floer Homology</h2>
+    </section>
+
+    <hr />
+
+    <section id="gauge">
+      <h2>Day 4: Gauge Theory</h2>
+    </section>
+
+    <hr />
+
+    <section id="knots">
+      <h2>Day 5: Knots and Surfaces</h2>
+      <p>Question: Is every slice knot ribbon?
+      - true fpr 2-bridge and most 3 stranded pretzels</p>
+      <p>Def: monodromy of surface</p>
+      <p>Thm: K ribbon and fibered -> monodromy of K extends over handle body</p>
+    </section>
+
+    <hr />
+
+    <section id="general">
+      <h2>General recurring concepts</h2>
+      <ul>
+        <li>
+          Various flavours of Floer Homology: Heegaard, Lagrangian, Instanton, ...
+        </li>
+        <li>
+          
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section id="projects">
+      <h2>Reflections</h2>
+      <ul>
+        <li>
+          It was an incredible conference that took place in a beautiful, historic hall. Organizers were clearly very passionate and cared a lot about the conference.   
+        </li>
+        <li>
+          I think I was the only undergrad/Bachelors student in attendance. The timing of the universe really did align for me to be here, including but not limited to:
+          <ul>
+            <li>chose to study abroad and during this Spring semester</li>
+            <li>my residence permit lasted until mid July</li>
+            <li>did not get into any of the REU's I applied to (lol)</li>
+            <li>worked with Prof. Stipcisz for my Junior paper</li>
+            <li>got into PCMI</li>
+            <li>declined an internship in AI education in Mongolia (I'm still grieving this)</li>
+          </ul>
+          I wouldn't have been able to attend the conference.
+        </li>
+        <li>
+            I didn't really grasp the sheer importance and impact of this conference for the field until the conference was coming to an end. With Dr. John Morgan himself in attendance, along with the Hungarian brothers and so many other top researchers in one place, such a gathering has not occured in a long time. During a conversation with a former student of Prof. Ozsváth, he expressed that he wished he was able to attend a conference like this as an undergrad. Still, I don't think I will come to appreciate its significance until later down the road. 
+        </li>
+        <li>
+          As expected, I didn't understand a majority of the talks, but it gave me a sense of the problems and ideas that are on the forefront. Many concepts repeated itself accross all the themes....
+        </li>
+        <li>
+            Jen Hom's talk was by far my favourite, it was the only non-panorama talk that I was able to follow through to the end. Yes some things were blackboxed, but the fundamental idea and narrative was presented so beautifully.
+            I especially liked her practice of displaying the previous and current slides as two halves. I was able to write detailed notes without having to race against the clock, and it faciliated connecting the whole narrative together. 
+            Granted, the visually driven nature of the problem helped ease my comprehension, but the more technical aspects (e.g. use of surgery exact triangle) was also presented very clearly. 
+            I'm certain I will try to incoporate that in any other talks I'd give in the future.
+        </li>
+        <li>
+            I got myself into a funny situation by signing up to present a poster based on just expository work conducted for my Junior paper and summer research (I was initially assured I could get some partial funding for presenting, but this turned out to not be the case).
+            Regardless, I couldn't back out, and I'd already started the poster making process the week before. 
+            I generally enjoyed it
+            It also helped that the session was on a Thursday after I'd felt a lot more comfortable and familiar around everyone. 
+            I was mainly concerned that everyone at the conference certainly knows about the content, as Gompf and Stipsicz is literally refered to as the "Bible" several times. So I was quite pleasantly surprised when a lot of people, especially grad students, showed interest in my poster!
+            A few of them later expressed to me that they did learn something new as they weren't working closely with 4-manifolds, or hadn't closely read the book in general. 
+            I'm glad I did it.
+        </li>
+        <li>
+            It initially felt as if I was throwing myself into deep water. I was quite awkward and scared to interact with people during the wine and cheese reception on Sunday, and of course I left early. With exception of 4 people who without question have more important people to talk to, I practically knew no one.
+            Thankfully, a fellow Princeton student who had just graduated was in attendance, by sticking with her I ended up getting lunch with a large group of grad students pretty much everyday. 
+        </li>
+        <li>
+            Through these conversations, I got to learn a lot about the process of applying and life in grad school. 
+            I also got to interact with a lot of Princeton people that I can now comfortably chat with in the Fine Hall common room, instead of just awkwardly acknowledging each other.
+        </li>
+        <li>
+            There was a sizable portion of non-men people in attendance, not just among the junior people but even more so among the speakers. That was a comforting site to see!
+        </li>
+        <li>
+            As a closing sentiment, I feel very lucky that things fell into place this semester. I feel like I've been at a bit of a rut after the 2.5 years at Princeton, and at times I lost confidence in my pursuit of grad school. There's a lot I can say on this, but in short this had been due to a culmination of the nderlying pressure, difficult workloads, not fully "fitting" into the math culture and a small disdain of being stuck in a "small" town (I have since learnt that other schools are actually really in the middle of nowhere, so I guess being 1.5 hours away from nyc by train isn't so bad).
+            But I loved being in a big and lively city, classes were generally enjoyable and less intense, there was a large cohort of students that I was able to surround myself with a lot of different people with varying shared interests. We had a fun like outside of math, despite BSM being tougher than most study abroad programs.
+            I gradually felt more happy doing math. I couldn't quite put into words why I felt like BSM was a good choice for me academically until someone I now consider a mentor did it for me, I hadn't felt "safe" doing math at Princeton, but I did here.
+            Now having talked to so many grad students, I feel even more assured that I want to go to grad school (although the application process is very much still scary.)
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    Last updated: June 2026 ·
+    Design based on <a href="https://latex.vercel.app" target="_blank">LaTeX.css</a>
+    by Vincent Dörig.
+  </footer>
+
+<script>
+  const toggle = document.getElementById('dark-mode-toggle');
+
+    if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('latex-dark');
+    toggle.textContent = '🌝';
+    }
+
+    toggle.addEventListener('click', () => {
+    document.body.classList.toggle('latex-dark');
+    const isDark = document.body.classList.contains('latex-dark');
+    toggle.textContent = isDark ? '🌝' : '🌚';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+</script>
+</body>
+</html>
