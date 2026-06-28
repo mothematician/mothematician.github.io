@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monica Sing — Photos</title>
+  <link rel="stylesheet" href="https://latex.vercel.app/style.min.css" />
+  <style>
+    /* ── base ── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      max-width: unset;
+      min-height: 100%;
+    }
+
+    body {
+      background: #f5f3ee;
+      font-family: inherit;
+      transition: background 0.3s;
+    }
+
+    .latex-dark body,
+    body.latex-dark {
+      background: #1a1815;
+    }
+
+    /* ── top bar ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.5rem;
+      height: 50px;
+      background: #f5f3ee;
+      border-bottom: 1px solid #e0ddd5;
+    }
+
+    body.latex-dark .topbar {
+      background: #1a1815;
+      border-bottom-color: #2e2b26;
+    }
+
+    .topbar a {
+      font-size: 0.82rem;
+      color: hotpink;
+      text-decoration: none;
+    }
+    .topbar a:hover { text-decoration: underline; }
+
+    .topbar-title {
+      font-size: 0.9rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+    }
+
+    .dark-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      padding: 0;
+      line-height: 1;
+    }
+
+    /* ── location section ── */
+    .location-section {
+      position: relative;
+      width: 100%;
+      /* height set by JS based on photo count */
+    }
+
+    .location-label {
+      text-align: center;
+      padding: 3.5rem 0 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .location-label h2 {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #999;
+      font-weight: normal;
+      margin: 0 0 0.2rem;
+    }
+
+    body.latex-dark .location-label h2 { color: #666; }
+
+    .location-label .place-name {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0;
+      color: #2a2620;
+      line-height: 1.1;
+    }
+
+    body.latex-dark .location-label .place-name { color: #e8e3da; }
+
+    .location-label .place-date {
+      font-size: 0.8rem;
+      color: #aaa;
+      margin: 0.3rem 0 0;
+      font-style: italic;
+    }
+
+    /* ── wall area ── */
+    .wall {
+      position: relative;
+      width: 100%;
+      /* min-height set per section by JS */
+    }
+
+    /* ── photo card ── */
+    .photo-card {
+      position: absolute;
+      background: #fff;
+      padding: 10px 10px 32px;
+      box-shadow: 2px 4px 14px rgba(0,0,0,0.13), 0 1px 3px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, z-index 0s;
+      z-index: 1;
+      /* width/height/top/left/rotate set by JS */
+    }
+
+    body.latex-dark .photo-card {
+      background: #2a2720;
+      box-shadow: 2px 4px 18px rgba(0,0,0,0.45);
+    }
+
+    .photo-card:hover {
+      box-shadow: 4px 8px 28px rgba(0,0,0,0.22);
+      z-index: 10;
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* placeholder when no image src */
+    .photo-card .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background: #e8e4dc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      color: #aaa;
+      text-align: center;
+      padding: 0.5rem;
+    }
+
+    body.latex-dark .photo-card .photo-placeholder {
+      background: #35312a;
+      color: #666;
+    }
+
+    .photo-card .caption {
+      position: absolute;
+      bottom: 6px;
+      left: 10px;
+      right: 10px;
+      font-size: 0.62rem;
+      color: #999;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-style: italic;
+    }
+
+    body.latex-dark .photo-card .caption { color: #666; }
+
+    /* ── section divider ── */
+    .section-divider {
+      border: none;
+      border-top: 1px dashed #d5d0c8;
+      margin: 1rem 4rem;
+    }
+
+    body.latex-dark .section-divider { border-top-color: #2e2b26; }
+
+    /* ── lightbox ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox img {
+      max-width: min(90vw, 900px);
+      max-height: 80vh;
+      object-fit: contain;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+
+    .lightbox-caption {
+      color: #ccc;
+      font-size: 0.82rem;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+    }
+    .lightbox-close:hover { opacity: 1; }
+
+    /* ── footer ── */
+    footer {
+      text-align: center;
+      padding: 3rem 0 2rem;
+      font-size: 0.78rem;
+      color: #bbb;
+    }
+
+    footer a { color: hotpink; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <a href="index.html">← Monica Sing</a>
+    <span class="topbar-title">Photos</span>
+    <button class="dark-toggle" id="dark-mode-toggle" aria-label="Toggle dark mode">🌚</button>
+  </div>
+
+  <div id="gallery"></div>
+
+  <footer>
+    <a href="index.html">← back to homepage</a>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">×</button>
+    <img id="lightbox-img" src="" alt="" />
+    <p class="lightbox-caption" id="lightbox-caption"></p>
+  </div>
+
+  <script>
+    // ─────────────────────────────────────────────────────────
+    // DATA — add your own photos here!
+    //
+    // Each section has a location name, date, and an array of photos.
+    // For each photo:
+    //   src: path to your image file, e.g. "assets/budapest1.jpg"
+    //         leave as "" to show a placeholder
+    //   caption: optional short label shown at the bottom of the polaroid
+    //   w, h: optional width/height in px (defaults to random between 160–260)
+    //
+    // Photos are placed randomly within the wall area — re-run the page
+    // or add ?reshuffle to the URL to get a new arrangement.
+    // ─────────────────────────────────────────────────────────
+    const sections = [
+      {
+        name: "Budapest, Hungary",
+        date: "Jan – Jun 2026",
+        photos: [
+          { src: "", caption: "Rényi Institute" },
+          { src: "", caption: "Gellért Hill" },
+          { src: "", caption: "Margit-sziget" },
+          { src: "", caption: "BSM whiteboard" },
+          { src: "", caption: "Altair Teaház" },
+          { src: "", caption: "GTLD conference" },
+          { src: "", caption: "Citadel at dusk" },
+          { src: "", caption: "Tóth Árpád promenade" },
+        ]
+      },
+      {
+        name: "Groningen, Netherlands",
+        date: "Jun – Aug 2025",
+        photos: [
+          { src: "", caption: "University of Groningen" },
+          { src: "", caption: "Martini Tower" },
+          { src: "", caption: "Canals" },
+          { src: "", caption: "Summer research" },
+          { src: "", caption: "" },
+        ]
+      },
+      {
+        name: "Waterloo, Canada",
+        date: "Aug 2023",
+        photos: [
+          { src: "", caption: "Perimeter Institute" },
+          { src: "", caption: "Quantum School" },
+          { src: "", caption: "" },
+          { src: "", caption: "" },
+        ]
+      },
+    ];
+
+    // ─────────────────────────────────────────────────────────
+    // LAYOUT ENGINE
+    // ─────────────────────────────────────────────────────────
+
+    // seeded random so layout is stable per session
+    function seededRand(seed) {
+      let s = seed;
+      return function() {
+        s = (s * 1664525 + 1013904223) & 0xffffffff;
+        return (s >>> 0) / 0xffffffff;
+      };
+    }
+
+    function buildGallery() {
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = '';
+
+      const viewW = Math.max(window.innerWidth, 320);
+      const MARGIN = 40; // px from edges
+      const ROW_H = 260; // approximate height per row
+      const COLS = Math.max(2, Math.floor((viewW - MARGIN * 2) / 220));
+
+      sections.forEach((section, si) => {
+        const rand = seededRand(si * 9999 + 1);
+
+        // section wrapper
+        const sec = document.createElement('div');
+        sec.className = 'location-section';
+
+        // label
+        const label = document.createElement('div');
+        label.className = 'location-label';
+        label.innerHTML = `
+          <h2>📍 Location</h2>
+          <p class="place-name">${section.name}</p>
+          <p class="place-date">${section.date}</p>
+        `;
+        sec.appendChild(label);
+
+        // wall
+        const wall = document.createElement('div');
+        wall.className = 'wall';
+
+        const photoCount = section.photos.length;
+        const rows = Math.ceil(photoCount / COLS);
+        const wallH = rows * ROW_H + 80;
+        wall.style.minHeight = wallH + 'px';
+
+        // place photos using a loose grid with random offsets
+        section.photos.forEach((photo, pi) => {
+          const col = pi % COLS;
+          const row = Math.floor(pi / COLS);
+
+          const cardW = Math.round(160 + rand() * 100); // 160–260
+          const cardH = Math.round(130 + rand() * 90);  // 130–220
+          const rotate = (rand() - 0.5) * 12; // -6 to +6 deg
+
+          const cellW = (viewW - MARGIN * 2) / COLS;
+          const cellH = ROW_H;
+
+          // center in cell + random nudge
+          const nudgeX = (rand() - 0.5) * (cellW - cardW - 20);
+          const nudgeY = (rand() - 0.5) * (cellH - cardH - 20);
+
+          const left = MARGIN + col * cellW + (cellW - cardW) / 2 + nudgeX;
+          const top  = row * cellH + (cellH - cardH) / 2 + nudgeY + 20;
+
+          const card = document.createElement('div');
+          card.className = 'photo-card';
+          card.style.cssText = `
+            width: ${cardW}px;
+            height: ${cardH + 22}px;
+            left: ${Math.max(MARGIN / 2, left)}px;
+            top: ${Math.max(10, top)}px;
+            transform: rotate(${rotate.toFixed(2)}deg);
+          `;
+
+          if (photo.src) {
+            const img = document.createElement('img');
+            img.src = photo.src;
+            img.alt = photo.caption || '';
+            img.style.height = cardH + 'px';
+            card.appendChild(img);
+          } else {
+            const ph = document.createElement('div');
+            ph.className = 'photo-placeholder';
+            ph.style.height = cardH + 'px';
+            ph.textContent = photo.caption || 'photo';
+            card.appendChild(ph);
+          }
+
+          if (photo.caption) {
+            const cap = document.createElement('div');
+            cap.className = 'caption';
+            cap.textContent = photo.caption;
+            card.appendChild(cap);
+          }
+
+          // hover: lift up
+          card.addEventListener('mouseenter', () => {
+            card.style.transform = `rotate(${(rotate * 0.3).toFixed(2)}deg) translateY(-6px) scale(1.03)`;
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = `rotate(${rotate.toFixed(2)}deg)`;
+          });
+
+          // click: lightbox (always)
+          card.addEventListener('click', () => openLightbox(photo.src, photo.caption));
+
+          wall.appendChild(card);
+        });
+
+        sec.appendChild(wall);
+
+        // divider between sections
+        if (si < sections.length - 1) {
+          const hr = document.createElement('hr');
+          hr.className = 'section-divider';
+          sec.appendChild(hr);
+        }
+
+        gallery.appendChild(sec);
+      });
+    }
+
+    // lightbox
+    function openLightbox(src, caption) {
+      const img = document.getElementById('lightbox-img');
+      if (src) {
+        img.src = src;
+        img.style.display = 'block';
+      } else {
+        img.src = '';
+        img.style.display = 'none';
+      }
+      document.getElementById('lightbox-caption').textContent = caption || '';
+      document.getElementById('lightbox').classList.add('open');
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', () => {
+      document.getElementById('lightbox').classList.remove('open');
+    });
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove('open');
+    });
+
+    // dark mode
+    const toggle = document.getElementById('dark-mode-toggle');
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('latex-dark');
+      toggle.textContent = '🌝';
+    }
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('latex-dark');
+      const isDark = document.body.classList.contains('latex-dark');
+      toggle.textContent = isDark ? '🌝' : '🌚';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // build + rebuild on resize
+    buildGallery();
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildGallery, 150);
+    });
+  </script>
+</body>
+</html>
