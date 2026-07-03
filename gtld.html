@@ -133,8 +133,32 @@
     <section id="exotica">
       <h2>Day 1: Exotica</h2>
       <div class="definition">Cobordism</div> (mainly from wikipedia) $\omega$
+
       <div class="definition">H-cobordism</div> 
-      <div class="definition">Symplectic manifolds</div> 
+      <div class="definition">Cobordism</div>
+      <p>A cobordism is a quintuple $(W, M, N, i, j)$ or $(W, M, N)$ with $\partial W = i(M) \sqcup j(N)$, where $W$ is compact (to avoid $M \times [0,1)$).</p>
+      <ul>
+        <li>Is equivalence relation on class of compact manifolds of same dim.</li>
+        <li>2 $n$-manifolds $M, N$ cobordant $\iff \exists W$ compact $(n+1)$-dim manifold st $\partial W = M \sqcup N$.</li>
+        <li>$\partial W$ is closed.</li>
+        <li>Cobordism theory is study of difference between all closed manifolds & those that are boundaries.</li>
+      </ul>
+      <p>$\to$ relates to <strong>concordance</strong> (aka Isotopy Cobordism) for submanifolds also in ambient space. (concordant $\iff$ cobordism clearly embedded cylinder $M \times I$ within $X \times I$).</p>
+      <p><em>i.e.</em> [pair of pants drawing] $\Rightarrow$ a pair of pants is a cobordism between $M$ & $N$.</p>
+      <p>$\hookrightarrow$ is example of more general cobordism: for any 2 manifolds $M, M'$, $M \sqcup M'$ is cobordant to connected sum $M \sharp M'$.</p>
+
+      <div class="definition">H-cobordism</div>
+      <p>An $(n+1)$-dim cobordism $W$ between $n$-dim manifolds $M$ & $N$ is an $h$-cobordism (homotopy equiv) if:</p>
+      $$M \hookrightarrow W \quad \& \quad N \hookrightarrow W \quad \text{are homotopy equivalences.}$$
+
+      <div class="definition">Symplectic manifolds</div>
+      <p>Smooth manifold + closed non-deg differential 2-form $\omega$ (Bowen / symplectic form).</p>
+      <ul>
+        <li>If $\{\cdot, \cdot\} : \mathbb{F}^n \times \mathbb{F}^n \to \mathbb{F}$ is non-deg skew-symm func. where $\{x, y\} = -\{y, x\}$ $\Rightarrow \{\cdot, \cdot\}$ is called a symplectic form on $\mathbb{F}^n$.</li>
+        <li>$\to$ dim must be even:
+          $$\Omega^\top = -\Omega \implies \det \Omega = \det(-\Omega) \implies \det \Omega = (-1)^n \det \Omega \implies 2 \mid n$$
+        </li>
+      </ul>
       <div class="definition">Exotica</div> 
       <div class="definition">Exotic pair relative to f</div> 
       <div class="definition">Fake</div> \(m^e \Sigma_{i=1}\)
@@ -252,6 +276,8 @@
   </footer>
 
 <script>
+
+    
   const toggle = document.getElementById('dark-mode-toggle');
 
     if (localStorage.getItem('theme') === 'dark') {
